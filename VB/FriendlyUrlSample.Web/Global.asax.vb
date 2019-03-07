@@ -31,14 +31,16 @@ Public Class [Global]
             Case BrowserHistoryMode.FriendlyUrl
                 RouteManager.RegisterRoutes(RouteTable.Routes)
                 ' ---
-                ' --- The default route registered in the RouteManager.RegisterRoutes() method:             
-                ' --- RouteTable.Routes.Add("ViewRouteName", "{ViewID}/{ObjectKey}/", "~/Default.aspx", false, New RouteValueDictionary() { { ViewShortcut.ObjectKeyParamName, string.Empty } });
+                ' --- The default route registered in the RouteManager.RegisterRoutes() method:
+                ' --- Dim routeValueDictionary As RouteValueDictionary = New RouteValueDictionary()
+                ' --- routeValueDictionary.Add("ObjectKey", String.Empty)
+                ' --- RouteTable.Routes.Add("ViewRouteName", "{ViewID}/{ObjectKey}/", "~/Default.aspx", False, routeValueDictionary)
                 ' --- "{ViewID}/{ObjectKey}/" where the ObjectKey parameter Is empty by default
                 ' ---                     
                 ' --- You can modify the route params as shown below. In this case, the '/XAF/Contact_DetailView/ContactId' route shows the corresponding view.
                 'RouteTable.Routes.Remove(RouteTable.Routes("ViewRouteName"))
                 'Dim routeValueDictionary As RouteValueDictionary = New RouteValueDictionary()
-                'routeValueDictionary.Add(ViewShortcut.ObjectKeyParamName, String.Empty)
+                'RouteValueDictionary.Add("ObjectKey", String.Empty)
                 'RouteTable.Routes.MapPageRoute("ViewRouteName", "XAF/{ViewID}/{ObjectKey}/", "~/Default.aspx", False, routeValueDictionary)
         End Select
 

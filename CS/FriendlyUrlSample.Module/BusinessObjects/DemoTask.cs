@@ -24,14 +24,14 @@ namespace FriendlyUrlSample.Module.BusinessObjects {
                 return priority;
             }
             set {
-                SetPropertyValue("Priority", ref priority, value);
+                SetPropertyValue(nameof(Priority), ref priority, value);
             }
         }
 
         [Association("Contact-DemoTask")]
         public XPCollection<Contact> Contacts {
             get {
-                return GetCollection<Contact>("Contacts");
+                return GetCollection<Contact>(nameof(Contacts));
             }
         }
     }

@@ -16,7 +16,7 @@ namespace FriendlyUrlSample.Module.BusinessObjects {
         [Association("Contact-DemoTask")]
         public XPCollection<DemoTask> Tasks {
             get {
-                return GetCollection<DemoTask>("Tasks");
+                return GetCollection<DemoTask>(nameof(Tasks));
             }
         }
 
