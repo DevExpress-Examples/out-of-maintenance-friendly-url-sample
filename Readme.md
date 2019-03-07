@@ -14,7 +14,7 @@ The URL representation depends on the static **WebApplication.RouteManager.Brows
 * /Default.aspx?ViewID=Contact_ListView
 * /Default.aspx?ViewID=Contact_DetailView&ObjectKey=ContactId
 
-**FriendlyUrl** (Enabled in this demo):
+**FriendlyUrl** (Enabled in this sample):
 * /Contact_ListView/
 * /Contact_DetailView/ContactId/
 
@@ -28,7 +28,7 @@ protected void Application_Start(Object sender, EventArgs e) {
   //
 }
 ```
-You can also change the routing mode and check another modes. Note, the **RouteManager.RegisterRoutes(RouteTable.Routes)** method should be also called when the FriendlyUrl mode is enabled. It requires to register the default route "{ViewID}/{ObjectKey}/" internally. Registration of the default route looks like this:
+You can also change the routing mode and check other modes. Note, the **RouteManager.RegisterRoutes(RouteTable.Routes)** method should be also called when the FriendlyUrl mode is enabled. It requires to register the default route "{ViewID}/{ObjectKey}/" internally. Registration of the default route looks like this:
 ```csharp
 RouteTable.Routes.Add("ViewRouteName", "{ViewID}/{ObjectKey}/", "~/Default.aspx", false, new RouteValueDictionary() { { ViewShortcut.ObjectKeyParamName, string.Empty } });
 ```
@@ -40,7 +40,7 @@ If you uncomment the following lines, the default route will be replaced to '/XA
 
 
 ### [CustomRouteManager.cs](./FriendlyUrlSample.Web/CustomRouteManager.cs) and [WebApplication.cs]
-Check these files to see how to customize the default routing. In this case, the URLs will look like this:
+Check these files to see how to customize the default routing. In this sample, the URLs looks like this:
 
 For ListView:  
 *  /Contacts/ instead of /Contact_ListView/
