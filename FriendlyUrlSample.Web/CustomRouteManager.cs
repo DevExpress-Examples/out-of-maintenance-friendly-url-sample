@@ -13,7 +13,10 @@ namespace FriendlyUrlSample.Web {
             if(BrowserHistoryMode != BrowserHistoryMode.FriendlyUrl) {
                 return base.GetRelativeUrl(shortcut, additionalParams);
             }
-            ViewShortcut localShortcut = new ViewShortcut(shortcut.ViewId, shortcut.ObjectKey);
+            ViewShortcut localShortcut = new ViewShortcut();
+            for(int i = 0; i < shortcut.Count; i++) {
+                localShortcut[shortcut.GetKey(i)] = shortcut[i];
+            }
             if(localShortcut.ViewId == application.FindListViewId(typeof(Contact))) {
                 localShortcut.ViewId = "Contacts";
             }
