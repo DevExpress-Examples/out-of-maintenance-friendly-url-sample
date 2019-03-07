@@ -1,9 +1,20 @@
 ﻿# Friendly URL Sample
 
 The **DevExpress.ExpressApp.Web.BrowserHistoryMode** enumeration contains values that specify the current routing mode.
+
+#### CS
 ```csharp
 public enum BrowserHistoryMode { Hash, QueryString, FriendlyUrl }
 ```
+#### VB
+```vb
+Public Enum BrowserHistoryMode
+    Hash
+    QueryString
+    FriendlyUrl
+End Enum
+```
+
 The URL representation depends on the static **WebApplication.RouteManager.BrowserHistoryMode** property value and looks like this:
 
 **Hash** (Default Mode):
@@ -18,28 +29,54 @@ The URL representation depends on the static **WebApplication.RouteManager.Brows
 * /Contact_ListView/
 * /Contact_DetailView/ContactId/
 
+
 *Files to look at*:
-### [Global.asax.cs](./FriendlyUrlSample.Web/Global.asax.cs)
+### [Global.asax.cs](./CS/FriendlyUrlSample.Web/Global.asax.cs) / [Global.asax.vb](./VB/FriendlyUrlSample.Web/Global.asax.vb)
 
 The FriendlyUrl mode is enabled in the Application_Start method. 
+
+#### CS
 ```csharp
 protected void Application_Start(Object sender, EventArgs e) {
   RouteManager.BrowserHistoryMode = BrowserHistoryMode.FriendlyUrl;
   //
 }
 ```
+#### VB
+```vb
+Protected Sub Application_Start(ByVal sender As Object, ByVal e As EventArgs)
+    RouteManager.BrowserHistoryMode = BrowserHistoryMode.FriendlyUrl
+    '
+End Sub
+```
+***
+
 You can also change the routing mode and check other modes. Note, the **RouteManager.RegisterRoutes(RouteTable.Routes)** method should be also called when the FriendlyUrl mode is enabled. This method registers the default route ("{ViewID}/{ObjectKey}/"). Internally, registration of the default route looks like this:
+#### CS
 ```csharp
-RouteTable.Routes.Add("ViewRouteName", "{ViewID}/{ObjectKey}/", "~/Default.aspx", false, new RouteValueDictionary() { { ViewShortcut.ObjectKeyParamName, string.Empty } });
+RouteTable.Routes.Add("ViewRouteName", "{ViewID}/{ObjectKey}/", "~/Default.aspx", false, new RouteValueDictionary() { { "ObjectKey", string.Empty } });
+```
+#### VB
+```vb
+Dim routeValueDictionary As RouteValueDictionary = New RouteValueDictionary()
+routeValueDictionary.Add("ObjectKey", String.Empty)
+RouteTable.Routes.Add("ViewRouteName", "{ViewID}/{ObjectKey}/", "~/Default.aspx", false, routeValueDictionary)
 ```
 If you uncomment the following lines, the default route will be replaced to '/XAF/Contact_DetailView/ContactId'.
+#### CS
 ```csharp
 //RouteTable.Routes.Remove(RouteTable.Routes["ViewRouteName"]);
-//RouteTable.Routes.MapPageRoute("ViewRouteName", "XAF/{ViewID}/{ObjectKey}/", "~/Default.aspx", false, new RouteValueDictionary() { { ViewShortcut.ObjectKeyParamName, string.Empty } });
+//RouteTable.Routes.MapPageRoute("ViewRouteName", "XAF/{ViewID}/{ObjectKey}/", "~/Default.aspx", false, new RouteValueDictionary() { { "ObjectKey", string.Empty } });
+```
+#### VB
+```vb
+'RouteTable.Routes.Remove(RouteTable.Routes("ViewRouteName"))
+'Dim routeValueDictionary As RouteValueDictionary = New RouteValueDictionary()
+'routeValueDictionary.Add("ObjectKey", String.Empty)
+'RouteTable.Routes.MapPageRoute("ViewRouteName", "XAF/{ViewID}/{ObjectKey}/", "~/Default.aspx", False, routeValueDictionary)
 ```
 
-
-### [CustomRouteManager.cs](./FriendlyUrlSample.Web/CustomRouteManager.cs) and [WebApplication.cs](./FriendlyUrlSample.Web/WebApplication.cs) 
+### [CustomRouteManager.cs](./CS/FriendlyUrlSample.Web/CustomRouteManager.cs) and [WebApplication.cs](./CS/FriendlyUrlSample.Web/WebApplication.cs) / [CustomRouteManager.vb](./VB/FriendlyUrlSample.Web/CustomRouteManager.vb) and [WebApplication.vb](./VB/FriendlyUrlSample.Web/WebApplication.vb) /
 Check these files to see how to customize the default routing. In this sample, the URLs looks like this:
 
 For ListView:  
@@ -50,5 +87,5 @@ For DetailView:
 *  /Contact/ContactId/ instead of /Contact_DetailView/ContactId/
 *  /Task/TaskId/ instead of /DemoTask_DetailView/TaskId/
  
-### [CustomLinkController.cs](./FriendlyUrlSample.Module.Web/Controllers/CustomLinkController.cs)
+### [CustomLinkController.cs](./CS/FriendlyUrlSample.Module.Web/Controllers/CustomLinkController.cs) / [CustomLinkController.vb](./VB/FriendlyUrlSample.Module.Web/Controllers/CustomLinkController.vb)
 This controller demostrates how to open a DetailView in the new window using the **WebApplication.RouteManager.GetRelativeUrl(viewShortcut)** method.
