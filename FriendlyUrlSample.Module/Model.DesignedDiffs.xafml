@@ -1,0 +1,17 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Application Title="FriendlyUrlSample">
+  <SchemaModules>
+    <SchemaModule Name="SystemModule" Version="19.1.1.0" IsNewNode="True" />
+  </SchemaModules>
+  <Views>
+    <ListView Id="Contact_ListView">
+      <Columns>
+        <ColumnInfo Id="Birthday" Index="-1" />
+        <ColumnInfo Id="FirstName" Index="-1" />
+        <ColumnInfo Id="LastName" Index="-1" />
+        <ColumnInfo Id="MiddleName" Index="-1" />
+        <ColumnInfo Id="Email" Index="1" />
+      </Columns>
+    </ListView>
+  </Views>
+</Application>
