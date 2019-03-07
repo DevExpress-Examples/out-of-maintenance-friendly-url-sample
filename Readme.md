@@ -96,7 +96,7 @@ If you uncomment the following lines, the default route will be replaced to '/XA
 'RouteTable.Routes.MapPageRoute("ViewRouteName", "XAF/{ViewID}/{ObjectKey}/", "~/Default.aspx", False, routeValueDictionary)
 ```
 
-### 2. [CustomRouteManager.cs](./CS/FriendlyUrlSample.Web/CustomRouteManager.cs) and [WebApplication.cs](./CS/FriendlyUrlSample.Web/WebApplication.cs) / [CustomRouteManager.vb](./VB/FriendlyUrlSample.Web/CustomRouteManager.vb) and [WebApplication.vb](./VB/FriendlyUrlSample.Web/WebApplication.vb) /
+### 2. [CustomRouteManager.cs](./CS/FriendlyUrlSample.Web/CustomRouteManager.cs) and [WebApplication.cs](./CS/FriendlyUrlSample.Web/WebApplication.cs) / [CustomRouteManager.vb](./VB/FriendlyUrlSample.Web/CustomRouteManager.vb) and [WebApplication.vb](./VB/FriendlyUrlSample.Web/WebApplication.vb)
 Check these files to see how to customize the default routing. In this sample, the URLs looks like this:
 
 For ListView:  
