@@ -28,7 +28,7 @@ protected void Application_Start(Object sender, EventArgs e) {
   //
 }
 ```
-You can also change the routing mode and check other modes. Note, the **RouteManager.RegisterRoutes(RouteTable.Routes)** method should be also called when the FriendlyUrl mode is enabled. It requires to register the default route "{ViewID}/{ObjectKey}/" internally. Registration of the default route looks like this:
+You can also change the routing mode and check other modes. Note, the **RouteManager.RegisterRoutes(RouteTable.Routes)** method should be also called when the FriendlyUrl mode is enabled. This method registers the default route ("{ViewID}/{ObjectKey}/"). Internally, registration of the default route looks like this:
 ```csharp
 RouteTable.Routes.Add("ViewRouteName", "{ViewID}/{ObjectKey}/", "~/Default.aspx", false, new RouteValueDictionary() { { ViewShortcut.ObjectKeyParamName, string.Empty } });
 ```
@@ -39,7 +39,7 @@ If you uncomment the following lines, the default route will be replaced to '/XA
 ```
 
 
-### [CustomRouteManager.cs](./FriendlyUrlSample.Web/CustomRouteManager.cs) and [WebApplication.cs]
+### [CustomRouteManager.cs](./FriendlyUrlSample.Web/CustomRouteManager.cs) and [WebApplication.cs](./FriendlyUrlSample.Web/WebApplication.cs) 
 Check these files to see how to customize the default routing. In this sample, the URLs looks like this:
 
 For ListView:  
