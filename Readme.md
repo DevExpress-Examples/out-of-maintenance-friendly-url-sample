@@ -112,4 +112,4 @@ This controller demonstrates how to open a DetailView in the new window using th
 
 ## Known issues
 
-The BrowserHistoryMode.FriendlyUrl mode is not supported Security Module yet.
+The BrowserHistoryMode.FriendlyUrl does not support Security Module.
