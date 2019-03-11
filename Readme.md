@@ -75,7 +75,7 @@ RouteTable.Routes.MapPageRoute("ViewRouteName", "YourCustomString/{ViewID}/{Obje
 
 ### 3. Fully change the default route format for BrowserHistoryMode.FriendlyUrl mode.
 
-To customize the default routing completely, create a custom RouteManager class ([CustomRouteManager.cs](./CS/FriendlyUrlSample.Web/CustomRouteManager.cs)/[CustomRouteManager.vb](./VB/FriendlyUrlSample.Web/CustomRouteManager.vb)) and register it in the overridden WebApplication.CreateRouteManager method (and [WebApplication.cs](./CS/FriendlyUrlSample.Web/WebApplication.cs/[WebApplication.vb](./VB/FriendlyUrlSample.Web/WebApplication.vb)). 
+To customize the default routing completely, create a custom RouteManager class ([CustomRouteManager.cs](./CS/FriendlyUrlSample.Web/CustomRouteManager.cs)/[CustomRouteManager.vb](./VB/FriendlyUrlSample.Web/CustomRouteManager.vb)) and register it in the overridden **WebApplication.CreateRouteManager** method ([WebApplication.cs](./CS/FriendlyUrlSample.Web/WebApplication.cs)/[WebApplication.vb](./VB/FriendlyUrlSample.Web/WebApplication.vb)).
 
 For ListView:  
 *  /Contacts/ instead of /Contact_ListView/
@@ -90,3 +90,4 @@ You can use the **WebApplication.RouteManager.GetRelativeUrl(viewShortcut)** met
 
 ## Known issues
  - The BrowserHistoryMode.FriendlyUrl does not support Security Module.
+ - Reports cannot be opened in new browser tabs.
