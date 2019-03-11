@@ -61,7 +61,7 @@ To have the '/YourCustomString/Contact_DetailView/ContactId' URL representation 
 //C#
 RouteManager.RegisterRoutes(RouteTable.Routes);
 RouteTable.Routes.Remove(RouteTable.Routes["ViewRouteName"]);
-RouteTable.Routes.MapPageRoute("ViewRouteName", "XAF/{ViewID}/{ObjectKey}/", "~/Default.aspx", false, new RouteValueDictionary() { { "ObjectKey", string.Empty } });
+RouteTable.Routes.MapPageRoute("ViewRouteName", "YourCustomString/{ViewID}/{ObjectKey}/", "~/Default.aspx", false, new RouteValueDictionary() { { "ObjectKey", string.Empty } });
 ```
 ```vb
 'VB
@@ -69,7 +69,7 @@ RouteManager.RegisterRoutes(RouteTable.Routes)
 RouteTable.Routes.Remove(RouteTable.Routes("ViewRouteName"))
 Dim routeValueDictionary As RouteValueDictionary = New RouteValueDictionary()
 routeValueDictionary.Add("ObjectKey", String.Empty)
-RouteTable.Routes.MapPageRoute("ViewRouteName", "XAF/{ViewID}/{ObjectKey}/", "~/Default.aspx", False, routeValueDictionary)
+RouteTable.Routes.MapPageRoute("ViewRouteName", "YourCustomString/{ViewID}/{ObjectKey}/", "~/Default.aspx", False, routeValueDictionary)
 ```
 
 
