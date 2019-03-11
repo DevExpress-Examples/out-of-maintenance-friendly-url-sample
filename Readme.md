@@ -16,7 +16,7 @@ The **DevExpress.ExpressApp.Web.BrowserHistoryMode** enumeration specifies the c
 * /Contact_ListView/
 * /Contact_DetailView/ContactId/
 
-To change mode, set the static **WebApplication.RouteManager.BrowserHistoryMode** property.
+To change mode, set the static **DevExpress.ExpressApp.Web.RouteManager.BrowserHistoryMode** property.
 
 
 **WebApplication.RouteManager** provides the following methods:
@@ -74,8 +74,7 @@ RouteTable.Routes.MapPageRoute("ViewRouteName", "YourCustomString/{ViewID}/{Obje
 
 
 ### 3. Fully change the default route format for BrowserHistoryMode.FriendlyUrl mode.
-
-To customize the default routing completely, create a custom RouteManager class ([CustomRouteManager.cs](./CS/FriendlyUrlSample.Web/CustomRouteManager.cs)/[CustomRouteManager.vb](./VB/FriendlyUrlSample.Web/CustomRouteManager.vb)) and register it in the overridden **WebApplication.CreateRouteManager** method ([WebApplication.cs](./CS/FriendlyUrlSample.Web/WebApplication.cs)/[WebApplication.vb](./VB/FriendlyUrlSample.Web/WebApplication.vb)).
+To customize the default routing completely, create a custom RouteManager class ([CustomRouteManager.cs](./CS/FriendlyUrlSample.Web/CustomRouteManager.cs)/[CustomRouteManager.vb](./VB/FriendlyUrlSample.Web/CustomRouteManager.vb)) and register it in the overridden **WebApplication.CreateRouteManager** method ([WebApplication.cs](./CS/FriendlyUrlSample.Web/WebApplication.cs)/[WebApplication.vb](./VB/FriendlyUrlSample.Web/WebApplication.vb)). The code in this example performs the following route customizations:
 
 For ListView:  
 *  /Contacts/ instead of /Contact_ListView/
@@ -84,10 +83,12 @@ For ListView:
 For DetailView:
 *  /Contact/ContactId/ instead of /Contact_DetailView/ContactId/
 *  /Task/TaskId/ instead of /DemoTask_DetailView/TaskId/
+
+
  
 ### 4. Open a DetailView in the new window from the client-side in BrowserHistoryMode.FriendlyUrl mode.
 You can use the **WebApplication.RouteManager.GetRelativeUrl(viewShortcut)** method to obtain a URL by the ViewShortcut object corresponding to a required View ([CustomLinkController.cs](./CS/FriendlyUrlSample.Module.Web/Controllers/CustomLinkController.cs) / [CustomLinkController.vb](./VB/FriendlyUrlSample.Module.Web/Controllers/CustomLinkController.vb)).
 
 ## Known issues
- - The BrowserHistoryMode.FriendlyUrl does not support Security Module.
- - Reports cannot be opened in new browser tabs.
+ - The BrowserHistoryMode.FriendlyUrl does not support the Security Module.
+ - Reports and dashboards cannot be opened in new browser tabs.
