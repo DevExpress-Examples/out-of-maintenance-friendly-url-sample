@@ -30,11 +30,11 @@ Public Class [Global]
                 ' --- DetailView: (/Default.aspx?ViewID=Contact_DetailView&ObjectKey=ContactId)
             Case BrowserHistoryMode.FriendlyUrl
                 RouteManager.RegisterRoutes(RouteTable.Routes)
-                ' --- You can modify the route params as shown below. In this case, the '/XAF/Contact_DetailView/ContactId' route shows the corresponding view.
+                ' --- You can modify the route params as shown below. In this case, the '/YourCustomString/Contact_DetailView/ContactId' route shows the corresponding view.
                 'RouteTable.Routes.Remove(RouteTable.Routes(RouteManager.ViewRouteName))
                 'Dim routeValueDictionary As RouteValueDictionary = New RouteValueDictionary()
                 'RouteValueDictionary.Add("ObjectKey", String.Empty)
-                'RouteTable.Routes.MapPageRoute(RouteManager.ViewRouteName, "XAF/{ViewID}/{ObjectKey}/", "~/Default.aspx", False, routeValueDictionary)
+                'RouteTable.Routes.MapPageRoute(RouteManager.ViewRouteName, "YourCustomString/{ViewID}/{ObjectKey}/", "~/Default.aspx", False, routeValueDictionary)
         End Select
 
         AddHandler ASPxWebControl.CallbackError, AddressOf Application_Error

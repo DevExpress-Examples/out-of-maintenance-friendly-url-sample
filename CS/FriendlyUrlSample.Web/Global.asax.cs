@@ -31,9 +31,9 @@ namespace FriendlyUrlSample.Web {
                     break;
                 case BrowserHistoryMode.FriendlyUrl:
                     RouteManager.RegisterRoutes(RouteTable.Routes);
-                    // --- You can modify the route params as shown below. In this case, the '/XAF/Contact_DetailView/ContactId' route shows the corresponding view.
+                    // --- You can modify the route params as shown below. In this case, the '/YourCustomString/Contact_DetailView/ContactId' route shows the corresponding view.
                     //RouteTable.Routes.Remove(RouteTable.Routes[RouteManager.ViewRouteName]);
-                    //RouteTable.Routes.MapPageRoute(RouteManager.ViewRouteName, "XAF/{ViewID}/{ObjectKey}/", "~/Default.aspx", false, new RouteValueDictionary() { { ViewShortcut.ObjectKeyParamName, string.Empty } });
+                    //RouteTable.Routes.MapPageRoute(RouteManager.ViewRouteName, "YourCustomString/{ViewID}/{ObjectKey}/", "~/Default.aspx", false, new RouteValueDictionary() { { ViewShortcut.ObjectKeyParamName, string.Empty } });
                     break;
             }
 
