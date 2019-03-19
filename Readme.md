@@ -35,6 +35,8 @@ GetViewShortcut returns [ViewShortcut](https://docs.devexpress.com/eXpressAppFra
 
 GetRelativeUrl returns a relative URL by [ViewShortcut](https://docs.devexpress.com/eXpressAppFramework/DevExpress.ExpressApp.ViewShortcut) and the dictionary with additional parameters.
 
+#### Important note
+The QueryString and FriendlyUrl modes are based on the standard routing mechanism using [query string](https://en.wikipedia.org/wiki/Query_string) and [History API](https://developer.mozilla.org/en-US/docs/Web/API/History_API). It allows getting full page content via one request and gives us some significant improvements. For example, you will be able to achieve the functionality described in the [How to open a View specified in an external link after logging in to a Web application with the security system enabled?](https://isc.devexpress.com/Thread/WorkplaceDetails/B222208) ticket without any customization.
 
 ## Routing customizations
 
