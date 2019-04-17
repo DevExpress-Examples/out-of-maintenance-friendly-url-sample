@@ -89,8 +89,4 @@ For DetailView:
 
  
 ### 4. Open a DetailView in the new window from the client-side in BrowserHistoryMode.FriendlyUrl mode.
-You can use the **WebApplication.RouteManager.GetRelativeUrl(viewShortcut)** method to obtain a URL by the ViewShortcut object corresponding to a required View ([CustomLinkController.cs](./CS/FriendlyUrlSample.Module.Web/Controllers/CustomLinkController.cs) / [CustomLinkController.vb](./VB/FriendlyUrlSample.Module.Web/Controllers/CustomLinkController.vb)).
-
-## Known issues
- - The BrowserHistoryMode.FriendlyUrl does not support the Security Module.
- - Reports and dashboards cannot be opened in new browser tabs.
+You can use the **WebApplication.ViewUrlManager.GetUrl(viewShortcut)** method to obtain a URL by the ViewShortcut object corresponding to a required View ([CustomLinkController.cs](./CS/FriendlyUrlSample.Module.Web/Controllers/CustomLinkController.cs) / [CustomLinkController.vb](./VB/FriendlyUrlSample.Module.Web/Controllers/CustomLinkController.vb)).
