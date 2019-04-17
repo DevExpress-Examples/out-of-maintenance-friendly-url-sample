@@ -122,9 +122,7 @@
     <Compile Include="WebModule.Designer.vb">
       <DependentUpon>WebModule.vb</DependentUpon>
     </Compile>
-    <Compile Include="WebModule.vb">
-      <SubType>Component</SubType>
-    </Compile>
+    <Compile Include="WebModule.vb" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Model.DesignedDiffs.xafml" />

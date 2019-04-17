@@ -37,8 +37,8 @@ Partial Public Class FriendlyUrlSampleAspNetApplication
         InitializeDefaults()
     End Sub
 
-    Protected Overrides Function CreateRouteManager() As IRouteManager
-        Return New CustomRouteManager(Me)
+    Protected Overrides Function CreateViewUrlManager() As IViewUrlManager
+        Return New CustomViewUrlManager()
     End Function
 
     Protected Overrides Sub CreateDefaultObjectSpaceProvider(ByVal args As CreateCustomObjectSpaceProviderEventArgs)

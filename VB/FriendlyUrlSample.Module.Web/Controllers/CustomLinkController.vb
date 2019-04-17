@@ -18,7 +18,7 @@ Namespace FriendlyUrlSample.[Module].Web.Controllers
             If johnNilsen IsNot Nothing Then
                 goToJohnNilsenAction.Active.RemoveItem("JohnNilsenIsNotExist")
                 Dim viewShortcut As ViewShortcut = New ViewShortcut(Application.GetDetailViewId(GetType(Contact)), ObjectSpace.GetKeyValueAsString(johnNilsen))
-                Dim url As String = (CType(Application, WebApplication)).RouteManager.GetRelativeUrl(viewShortcut)
+                Dim url As String = (CType(Application, WebApplication)).ViewUrlManager.GetUrl(viewShortcut)
                 goToJohnNilsenAction.SetClientScript($"window.open('{url}', '_blank')", False)
             Else
                 goToJohnNilsenAction.Active("JohnNilsenIsNotExist") = False

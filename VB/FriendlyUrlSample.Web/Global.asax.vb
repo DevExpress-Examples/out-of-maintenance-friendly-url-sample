@@ -18,25 +18,7 @@ Public Class [Global]
         InitializeComponent()
     End Sub
     Protected Sub Application_Start(ByVal sender As Object, ByVal e As EventArgs)
-        RouteManager.BrowserHistoryMode = BrowserHistoryMode.FriendlyUrl
-
-        Select Case RouteManager.BrowserHistoryMode
-            Case BrowserHistoryMode.Hash
-                ' --- The Hash mode Is enabled by default 
-                ' --- ListView: (/Default.aspx#ViewID=Contact_ListView)
-                ' --- DetailView: (/Default.aspx#ViewID=Contact_DetailView&ObjectKey=ContactId)
-            Case BrowserHistoryMode.QueryString
-                ' --- ListView: (/Default.aspx?ViewID=Contact_ListView)
-                ' --- DetailView: (/Default.aspx?ViewID=Contact_DetailView&ObjectKey=ContactId)
-            Case BrowserHistoryMode.FriendlyUrl
-                RouteManager.RegisterRoutes(RouteTable.Routes)
-                ' --- You can modify the route params as shown below. In this case, the '/YourCustomString/Contact_DetailView/ContactId' route shows the corresponding view.
-                'RouteTable.Routes.Remove(RouteTable.Routes(RouteManager.ViewRouteName))
-                'Dim routeValueDictionary As RouteValueDictionary = New RouteValueDictionary()
-                'RouteValueDictionary.Add("ObjectKey", String.Empty)
-                'RouteTable.Routes.MapPageRoute(RouteManager.ViewRouteName, "YourCustomString/{ViewID}/{ObjectKey}/", "~/Default.aspx", False, routeValueDictionary)
-        End Select
-
+        RouteTable.Routes.RegisterDefaultXafRoutes()
         AddHandler ASPxWebControl.CallbackError, AddressOf Application_Error
 #If EASYTEST Then
         DevExpress.ExpressApp.Web.TestScripts.TestScriptsManager.EasyTestEnabled = True

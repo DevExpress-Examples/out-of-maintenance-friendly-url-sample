@@ -16,6 +16,18 @@ Imports DevExpress.ExpressApp.Model.DomainLogics
 Imports DevExpress.ExpressApp.Model.NodeGenerators
 
 ' For more typical usage scenarios, be sure to check out https://docs.devexpress.com/eXpressAppFramework/DevExpress.ExpressApp.ModuleBase.
+
+Public Interface IModelViewWebExtender
+    Property ViewUrlAlias As String
+End Interface
+
+<DomainLogic(GetType(IModelViewWebExtender))>
+Public Class ModelViewWebExtenderLogic
+    Public Function Get_ViewUrlAlias(ByVal model As IModelViewWebExtender) As String
+        Return (CType(model, IModelView)).Id
+    End Function
+End Class
+
 <ToolboxItemFilter("Xaf.Platform.Web")> _
 Partial Public NotInheritable Class FriendlyUrlSampleAspNetModule
     Inherits ModuleBase
@@ -25,6 +37,11 @@ Partial Public NotInheritable Class FriendlyUrlSampleAspNetModule
     Public Overrides Function GetModuleUpdaters(ByVal objectSpace As IObjectSpace, ByVal versionFromDB As Version) As IEnumerable(Of ModuleUpdater)
         Return ModuleUpdater.EmptyModuleUpdaters
     End Function
+
+    Public Overrides Sub ExtendModelInterfaces(ByVal extenders As ModelInterfaceExtenders)
+        MyBase.ExtendModelInterfaces(extenders)
+        extenders.Add(Of IModelView, IModelViewWebExtender)()
+    End Sub
 
     Public Overrides Sub Setup(application As XafApplication)
         MyBase.Setup(application)

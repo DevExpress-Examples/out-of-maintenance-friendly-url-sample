@@ -12,8 +12,8 @@ namespace FriendlyUrlSample.Web {
         private FriendlyUrlSample.Module.Web.FriendlyUrlSampleAspNetModule module4;
         private DevExpress.ExpressApp.Objects.BusinessClassLibraryCustomizationModule objectsModule;
 
-        protected override IRouteManager CreateRouteManager() {
-            return new CustomRouteManager(this);
+        protected override IViewUrlManager CreateViewUrlManager() {
+            return new CustomViewUrlManager();
         }
 
         #region Default XAF configuration options (https://www.devexpress.com/kb=T501418)

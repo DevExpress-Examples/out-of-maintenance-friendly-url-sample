@@ -10,4 +10,10 @@
       <RegisteredPropertyEditor PropertyType="System.Drawing.Color" EditorType="DevExpress.ExpressApp.Web.Editors.ASPx.ASPxColorPickerPropertyEditor" />
     </PropertyEditor>
   </ViewItems>
+  <Views>
+    <ListView Id="Contact_ListView" ViewUrlAlias="Contacts" />
+    <ListView Id="Contact_DetailView" ViewUrlAlias="Contact" />
+    <ListView Id="DemoTask_ListView" ViewUrlAlias="Tasks" />
+    <ListView Id="DemoTask_DetailView" ViewUrlAlias="Task" />
+  </Views>
 </Application>

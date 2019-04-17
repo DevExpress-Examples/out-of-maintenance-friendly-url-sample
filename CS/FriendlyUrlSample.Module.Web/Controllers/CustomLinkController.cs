@@ -15,7 +15,7 @@ namespace FriendlyUrlSample.Module.Web.Controllers {
             if(johnNilsen != null) {
                 goToJohnNilsenAction.Active.RemoveItem("JohnNilsenIsNotExist");
                 ViewShortcut viewShortcut = new ViewShortcut(Application.GetDetailViewId(typeof(Contact)), ObjectSpace.GetKeyValueAsString(johnNilsen));
-                string url = ((WebApplication)Application).RouteManager.GetRelativeUrl(viewShortcut);
+                string url = ((WebApplication)Application).ViewUrlManager.GetUrl(viewShortcut);
                 goToJohnNilsenAction.SetClientScript($"window.open('{url}', '_blank')", false);
             }
             else {
