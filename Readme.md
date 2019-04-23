@@ -23,6 +23,7 @@ End Interface
 **GetViewShortcut** - returns a [ViewShortcut](https://docs.devexpress.com/eXpressAppFramework/DevExpress.ExpressApp.ViewShortcut) by the current URL.
 
 We provide the following implementations of the IViewUrlManager interface:
+
 **ViewUrlHashManager** - implements the classic functionality, where URLs contain a full description of ViewShortcut parameters:
 * /Default.aspx#ViewID=Contact_ListView
 * /Default.aspx#ViewID=Contact_DetailView&ObjectKey=ContactId
