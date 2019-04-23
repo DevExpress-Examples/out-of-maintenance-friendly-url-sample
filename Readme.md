@@ -33,6 +33,7 @@ We provide the following implementations of the IViewUrlManager interface:
 * /Contact_DetailView/ContactId/
 
 In addition, you can provide a custom implementation.
+
 Override the **WebApplication.CreateViewUrlManager** method to specify the application's URL Manager.
 
 ## How to enable User-Friendly URLs
