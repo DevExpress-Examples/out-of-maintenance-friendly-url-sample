@@ -104,7 +104,7 @@ For DetailView:
 *  /Contact/ContactId/ instead of /Contact_DetailView/ContactId/
 *  /Task/TaskId/ instead of /DemoTask_DetailView/TaskId/
 
-Check the ([WebModule.cs](./CS/FriendlyUrlSample.Web/WebModule.cs)/[WebModule.vb](./VB/FriendlyUrlSample.Web/WebModule.vb)) files to see the implementation of the model extender
+Check the ([WebModule.cs](./CS/FriendlyUrlSampleModule.Module.Web/WebModule.cs)/[WebModule.vb](./VB/FriendlyUrlSample.Module.Web/WebModule.vb)) files to see the implementation of the model extender
  
 ### 4. Open a DetailView in the new window from the client-side in BrowserHistoryMode.FriendlyUrl mode.
 You can use the **WebApplication.ViewUrlManager.GetUrl(viewShortcut)** method to obtain a URL by the ViewShortcut object corresponding to a required View ([CustomLinkController.cs](./CS/FriendlyUrlSample.Module.Web/Controllers/CustomLinkController.cs) / [CustomLinkController.vb](./VB/FriendlyUrlSample.Module.Web/Controllers/CustomLinkController.vb)).
