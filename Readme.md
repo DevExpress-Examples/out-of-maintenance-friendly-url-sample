@@ -2,7 +2,7 @@
 
 ## How it works
 
-The application's URLs are managed by the **WebApplication.ViewUrlManager** object. This object should implement the **IViewUrlManager** interface with two methods - GetUrl and GetViewShortcut:
+The application's URLs are managed by the **WebApplication.ViewUrlManager** object. This object should implement the **IViewUrlManager** interface with two methods - *GetUrl* and *GetViewShortcut*:
 
 ```csharp
 //C#
@@ -18,9 +18,9 @@ Interface IViewUrlManager
     Function GetViewShortcut() As ViewShortcut
 End Interface
 ```
-The GetUrl method returns a URL based on a [ViewShortcut](https://docs.devexpress.com/eXpressAppFramework/DevExpress.ExpressApp.ViewShortcut) and a dictionary of additional parameters.
+**GetUrl** - returns a URL based on a [ViewShortcut](https://docs.devexpress.com/eXpressAppFramework/DevExpress.ExpressApp.ViewShortcut) and a dictionary of additional parameters.
 
-The GetViewShortcut method returns a [ViewShortcut](https://docs.devexpress.com/eXpressAppFramework/DevExpress.ExpressApp.ViewShortcut) by the current URL.
+**GetViewShortcut** - returns a [ViewShortcut](https://docs.devexpress.com/eXpressAppFramework/DevExpress.ExpressApp.ViewShortcut) by the current URL.
 
 We provide the following implementations of the IViewUrlManager interface:
 **ViewUrlHashManager** - implements the classic functionality, where URLs contain a full description of ViewShortcut parameters:
