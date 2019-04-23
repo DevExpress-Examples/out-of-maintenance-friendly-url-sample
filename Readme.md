@@ -1,42 +1,75 @@
-﻿# ASP.NET WebForms User-Friendly URLs for Views - Early Access Preview v19.1
+﻿# ASP.NET WebForms User-Friendly URLs for Views - v19.1
 
 ## How it works
 
-The **DevExpress.ExpressApp.Web.BrowserHistoryMode** enumeration specifies the current routing mode and URL representation:
-
-**Hash** (Default Mode)
-* /Default.aspx#ViewID=Contact_ListView
-* /Default.aspx#ViewID=Contact_DetailView&ObjectKey=ContactId
-
-**QueryString**
-* /Default.aspx?ViewID=Contact_ListView
-* /Default.aspx?ViewID=Contact_DetailView&ObjectKey=ContactId
-
-**FriendlyUrl** (Enabled in this sample)
-* /Contact_ListView/
-* /Contact_DetailView/ContactId/
-
-To change mode, set the static **DevExpress.ExpressApp.Web.RouteManager.BrowserHistoryMode** property.
-
-
-**WebApplication.RouteManager** provides the following methods:
+The **IViewUrlManager** interface is used to manage routing mechanism in XAF.
 
 ```csharp
 //C#
-public virtual ViewShortcut GetViewShortcut(string parameter);
-public virtual string GetRelativeUrl(ViewShortcut shortcut, IDictionary<string, string> additionalParams = null);
+public interface IViewUrlManager {
+    string GetUrl(ViewShortcut shortcut, IDictionary<string, string> additionalParams = null);
+    ViewShortcut GetViewShortcut();
+}
 ```
 ```vb
 'VB
-Public Overridable Function GetViewShortcut(ByVal parameter As String) As ViewShortcut
-Public Overridable Function GetRelativeUrl(ByVal shortcut As ViewShortcut, ByVal Optional additionalParams As IDictionary(Of String, String) = Nothing) As String
+Interface IViewUrlManager
+    Function GetUrl(ByVal shortcut As ViewShortcut, ByVal Optional additionalParams As IDictionary(Of String, String) = Nothing) As String
+    Function GetViewShortcut() As ViewShortcut
+End Interface
 ```
-GetViewShortcut returns [ViewShortcut](https://docs.devexpress.com/eXpressAppFramework/DevExpress.ExpressApp.ViewShortcut) by current URL. The string parameter is required for backward compatibility with the default BrowserHistoryMode.Hash mode.
+GetViewShortcut returns [ViewShortcut](https://docs.devexpress.com/eXpressAppFramework/DevExpress.ExpressApp.ViewShortcut) by current URL.
 
-GetRelativeUrl returns a relative URL by [ViewShortcut](https://docs.devexpress.com/eXpressAppFramework/DevExpress.ExpressApp.ViewShortcut) and the dictionary with additional parameters.
+GetUrl returns a URL by [ViewShortcut](https://docs.devexpress.com/eXpressAppFramework/DevExpress.ExpressApp.ViewShortcut) and the dictionary with additional parameters.
 
+WebApplication has the **ViewUrlManager** property for getting access to the current instance and the virtual **CreateViewUrlManager method** for creating a custom functionality.
+
+The ViewUrlManager and ViewUrlHashManager classes implement this interface out of the box. ViewUrlHashManager implements classic functionality via hash and created by default. ViewUrlManager implements the User-Friendly URLs mechanism.
+
+ViewUrlHashManager (default):
+* /Default.aspx#ViewID=Contact_ListView
+* /Default.aspx#ViewID=Contact_DetailView&ObjectKey=ContactId
+
+ViewUrlManager:
+* /Contact_ListView/
+* /Contact_DetailView/ContactId/
+
+## How to enable User-Friendly URLs
+
+Perform the following steps to enable User-Friendly URLs in your ASP.NET application:
+
+Create ViewUrlManager instance in the overridden CreateViewUrlManager method of the WebApplication descendant:
+
+```csharp
+//C#
+protected override IViewUrlManager CreateViewUrlManager() {
+    return new ViewUrlManager();
+}
+```
+```vb
+'VB
+Protected Overrides Function CreateViewUrlManager() As IViewUrlManager
+    Return New ViewUrlManager()
+End Function
+```
+Call the static RouteTable.Routes.RegisterDefaultXafRoutes() method in the Application_Start method of the Global.asax file:
+
+```csharp
+//C#
+protected void Application_Start(Object sender, EventArgs e) {
+  RouteTable.Routes.RegisterDefaultXafRoutes();
+  //
+}
+```
+```vb
+'VB
+Protected Sub Application_Start(ByVal sender As Object, ByVal e As EventArgs)
+    RouteTable.Routes.RegisterDefaultXafRoutes()
+    '
+End Sub
+```
 #### Important note
-The QueryString and FriendlyUrl modes are based on the standard routing mechanism using [query string](https://en.wikipedia.org/wiki/Query_string) and [History API](https://developer.mozilla.org/en-US/docs/Web/API/History_API). It allows getting full page content via one request and gives us some significant improvements. For example, you will be able to achieve the functionality described in the [How to open a View specified in an external link after logging in to a Web application with the security system enabled?](https://isc.devexpress.com/Thread/WorkplaceDetails/B222208) ticket without any customization.
+The new User-Friendly URLs feature are based on the standard routing mechanism using [query string](https://en.wikipedia.org/wiki/Query_string) and [History API](https://developer.mozilla.org/en-US/docs/Web/API/History_API). It allows getting full page content via one request and gives us some significant improvements. For example, you will be able to achieve the functionality described in the [How to open a View specified in an external link after logging in to a Web application with the security system enabled?](https://isc.devexpress.com/Thread/WorkplaceDetails/B222208) ticket without any customization.
 
 ## Routing customizations
 
