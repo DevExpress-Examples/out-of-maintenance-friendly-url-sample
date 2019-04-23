@@ -73,43 +73,26 @@ The new User-Friendly URLs feature are based on the standard routing mechanism u
 
 ## Routing customizations
 
-### 1. Enable BrowserHistoryMode.FriendlyUrl mode in the Web application.
-In the YourSolutionName.Web project ([Global.asax.cs](./CS/FriendlyUrlSample.Web/Global.asax.cs)/[Global.asax.vb](./VB/FriendlyUrlSample.Web/Global.asax.vb)), check out the Application_Start method:
-
-```csharp
-//C#
-protected void Application_Start(Object sender, EventArgs e) {
-  RouteManager.BrowserHistoryMode = BrowserHistoryMode.FriendlyUrl;
-  //
-}
-```
-```vb
-'VB
-Protected Sub Application_Start(ByVal sender As Object, ByVal e As EventArgs)
-    RouteManager.BrowserHistoryMode = BrowserHistoryMode.FriendlyUrl
-    '
-End Sub
-```
-### 2. Slightly change the default route format for BrowserHistoryMode.FriendlyUrl mode.
+### 1. Slightly change the default route format for BrowserHistoryMode.FriendlyUrl mode.
 To have the '/YourCustomString/Contact_DetailView/ContactId' URL representation (just add a prefix and keep the rest), remove the default route and add a custom one using the following code:
 ```csharp
 //C#
-RouteManager.RegisterRoutes(RouteTable.Routes);
-RouteTable.Routes.Remove(RouteTable.Routes[RouteManager.ViewRouteName]);
-RouteTable.Routes.MapPageRoute(RouteManager.ViewRouteName, "YourCustomString/{ViewID}/{ObjectKey}/", "~/Default.aspx", false, new RouteValueDictionary() { { "ObjectKey", string.Empty } });
+RouteTable.Routes.RegisterDefaultXafRoutes();
+RouteTable.Routes.Remove(RouteTable.Routes[ViewUrlManager.RouteName]);
+RouteTable.Routes.MapPageRoute(ViewUrlManager.RouteName, "YourCustomString/{ViewID}/{ObjectKey}/", "~/Default.aspx", false, new RouteValueDictionary() { { "ObjectKey", string.Empty } });
 ```
 ```vb
 'VB
-RouteManager.RegisterRoutes(RouteTable.Routes)
-RouteTable.Routes.Remove(RouteTable.Routes(RouteManager.ViewRouteName))
+RouteTable.Routes.RegisterDefaultXafRoutes()
+RouteTable.Routes.Remove(RouteTable.Routes(ViewUrlManager.RouteName))
 Dim routeValueDictionary As RouteValueDictionary = New RouteValueDictionary()
 routeValueDictionary.Add("ObjectKey", String.Empty)
-RouteTable.Routes.MapPageRoute(RouteManager.ViewRouteName, "YourCustomString/{ViewID}/{ObjectKey}/", "~/Default.aspx", False, routeValueDictionary)
+RouteTable.Routes.MapPageRoute(ViewUrlManager.RouteName, "YourCustomString/{ViewID}/{ObjectKey}/", "~/Default.aspx", False, routeValueDictionary)
 ```
 
 
-### 3. Fully change the default route format for BrowserHistoryMode.FriendlyUrl mode.
-To customize the default routing completely, create a custom RouteManager class ([CustomRouteManager.cs](./CS/FriendlyUrlSample.Web/CustomRouteManager.cs)/[CustomRouteManager.vb](./VB/FriendlyUrlSample.Web/CustomRouteManager.vb)) and register it in the overridden **WebApplication.CreateRouteManager** method ([WebApplication.cs](./CS/FriendlyUrlSample.Web/WebApplication.cs)/[WebApplication.vb](./VB/FriendlyUrlSample.Web/WebApplication.vb)). The code in this example performs the following route customizations:
+### 2. Fully change the default route format for BrowserHistoryMode.FriendlyUrl mode.
+To customize the default routing completely, create a custom class which implements the IViewUrlManager interface ([CustomRouteManager.cs](./CS/FriendlyUrlSample.Web/CustomViewUrlManager.cs)/[CustomViewUrlManager.vb](./VB/FriendlyUrlSample.Web/CustomViewUrlManager.vb)) and register it in the overridden **WebApplication.CreateRouteManager** method ([WebApplication.cs](./CS/FriendlyUrlSample.Web/WebApplication.cs)/[WebApplication.vb](./VB/FriendlyUrlSample.Web/WebApplication.vb)). The code in this example performs the following route customizations:
 
 For ListView:  
 *  /Contacts/ instead of /Contact_ListView/
