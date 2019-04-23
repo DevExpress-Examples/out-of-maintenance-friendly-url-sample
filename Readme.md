@@ -2,7 +2,7 @@
 
 ## How it works
 
-The **IViewUrlManager** interface is used to manage routing mechanism in XAF.
+The application's URLs are managed by the **WebApplication.ViewUrlManager** object. This object should implement the **IViewUrlManager** interface with two methods - GetUrl and GetViewShortcut:
 
 ```csharp
 //C#
@@ -18,27 +18,24 @@ Interface IViewUrlManager
     Function GetViewShortcut() As ViewShortcut
 End Interface
 ```
-GetViewShortcut returns [ViewShortcut](https://docs.devexpress.com/eXpressAppFramework/DevExpress.ExpressApp.ViewShortcut) by current URL.
+The GetUrl method returns a URL based on a [ViewShortcut](https://docs.devexpress.com/eXpressAppFramework/DevExpress.ExpressApp.ViewShortcut) and a dictionary of additional parameters.
 
-GetUrl returns a URL by [ViewShortcut](https://docs.devexpress.com/eXpressAppFramework/DevExpress.ExpressApp.ViewShortcut) and the dictionary with additional parameters.
+The GetViewShortcut method returns a [ViewShortcut](https://docs.devexpress.com/eXpressAppFramework/DevExpress.ExpressApp.ViewShortcut) by the current URL.
 
-WebApplication has the **ViewUrlManager** property for getting access to the current instance and the virtual **CreateViewUrlManager method** for creating a custom functionality.
-
-The ViewUrlManager and ViewUrlHashManager classes implement this interface out of the box. ViewUrlHashManager implements classic functionality via hash and created by default. ViewUrlManager implements the User-Friendly URLs mechanism.
-
-ViewUrlHashManager (default):
+We provide the following implementations of the IViewUrlManager interface:
+**ViewUrlHashManager** - implements the classic functionality, where URLs contain a full description of ViewShortcut parameters:
 * /Default.aspx#ViewID=Contact_ListView
 * /Default.aspx#ViewID=Contact_DetailView&ObjectKey=ContactId
 
-ViewUrlManager:
+**ViewUrlManager** - implements the built-in User-Friendly URLs mechanism:
 * /Contact_ListView/
 * /Contact_DetailView/ContactId/
 
+In addition, you can provide a custom implementation. Override the **WebApplication.CreateViewUrlManager** method to specify the application's URL Manager.
+
 ## How to enable User-Friendly URLs
 
-Perform the following steps to enable User-Friendly URLs in your ASP.NET application:
-
-Create ViewUrlManager instance in the overridden CreateViewUrlManager method of the WebApplication descendant:
+1. Create a ViewUrlManager instance in the overridden CreateViewUrlManager method of the WebApplication descendant:
 
 ```csharp
 //C#
@@ -52,7 +49,7 @@ Protected Overrides Function CreateViewUrlManager() As IViewUrlManager
     Return New ViewUrlManager()
 End Function
 ```
-Call the static RouteTable.Routes.RegisterDefaultXafRoutes() method in the Application_Start method of the Global.asax file:
+2. Call the static RouteTable.Routes.RegisterDefaultXafRoutes() method in the Application_Start method of the Global.asax file:
 
 ```csharp
 //C#
@@ -68,13 +65,13 @@ Protected Sub Application_Start(ByVal sender As Object, ByVal e As EventArgs)
     '
 End Sub
 ```
-#### Important note
-The new User-Friendly URLs feature is based on the standard routing mechanism using [query string](https://en.wikipedia.org/wiki/Query_string) and [History API](https://developer.mozilla.org/en-US/docs/Web/API/History_API). It allows getting full page content via one request and gives us some significant improvements. For example, you will be able to achieve the functionality described in the [How to open a View specified in an external link after logging in to a Web application with the security system enabled?](https://isc.devexpress.com/Thread/WorkplaceDetails/B222208) ticket without any customization.
+#### Note
+The new User-Friendly URLs feature is based on the standard routing mechanism that uses a [query string](https://en.wikipedia.org/wiki/Query_string) and a [History API](https://developer.mozilla.org/en-US/docs/Web/API/History_API). This allows you to get full page content in a single request and gives us other significant improvements. For example, you will be able to achieve the functionality described in the [How to open a View specified in an external link after logging in to a Web application with the security system enabled?](https://isc.devexpress.com/Thread/WorkplaceDetails/B222208) ticket without any customization.
 
-## Routing customizations
+## Routing customization
 
-### 1. Slightly change the default route format for BrowserHistoryMode.FriendlyUrl mode.
-To have the '/YourCustomString/Contact_DetailView/ContactId' URL representation (just add a prefix and keep the rest), remove the default route and add a custom one using the following code:
+### 1. How to change the default format of User-Friendly URLs
+The following example shows how to add the *YourCustomString* prefix to the default user-friendly URL format. It removes the default routing rule (YourClass_View/KeyValue) and adds a custom one (YourCustomString/YourClass_View/KeyValue).
 ```csharp
 //C#
 using System;
@@ -103,11 +100,11 @@ Protected Sub Application_Start(ByVal sender As Object, ByVal e As EventArgs)
 End Sub
 ```
 
+### 2. How to provide custom URLs
+1. Create a custom class that implements the IViewUrlManager interface: [CustomRouteManager.cs](./CS/FriendlyUrlSample.Web/CustomViewUrlManager.cs)/[CustomViewUrlManager.vb](./VB/FriendlyUrlSample.Web/CustomViewUrlManager.vb).
+2. Override the **CreateRouteManager** method in the application's WebApplication descendant: [WebApplication.cs](./CS/FriendlyUrlSample.Web/WebApplication.cs)/[WebApplication.vb](./VB/FriendlyUrlSample.Web/WebApplication.vb). 
 
-### 2. Fully change the default route format for BrowserHistoryMode.FriendlyUrl mode.
-To customize the default routing completely, create a custom class which implements the IViewUrlManager interface ([CustomRouteManager.cs](./CS/FriendlyUrlSample.Web/CustomViewUrlManager.cs)/[CustomViewUrlManager.vb](./VB/FriendlyUrlSample.Web/CustomViewUrlManager.vb)) and register it in the overridden **WebApplication.CreateRouteManager** method ([WebApplication.cs](./CS/FriendlyUrlSample.Web/WebApplication.cs)/[WebApplication.vb](./VB/FriendlyUrlSample.Web/WebApplication.vb)). 
-
-The code in this example demonstates how to create model extender to allow customization the ViewId parameter via the model and performs the following route customizations:
+The attached example uses a model extender to allow specifying user-friendly View identifiers in the Model Editor:
 
 For ListView:  
 *  /Contacts/ instead of /Contact_ListView/
@@ -117,7 +114,7 @@ For DetailView:
 *  /Contact/ContactId/ instead of /Contact_DetailView/ContactId/
 *  /Task/TaskId/ instead of /DemoTask_DetailView/TaskId/
 
-Check the ([WebModule.cs](./CS/FriendlyUrlSample.Module.Web/WebModule.cs)/[WebModule.vb](./VB/FriendlyUrlSample.Module.Web/WebModule.vb)) files to see the implementation of the IModelView extender.
+Check the [WebModule.cs](./CS/FriendlyUrlSample.Module.Web/WebModule.cs) and [WebModule.vb](./VB/FriendlyUrlSample.Module.Web/WebModule.vb) files to see the IModelView extender's implementation.
  
-### 3. Open a DetailView in the new window from the client-side in BrowserHistoryMode.FriendlyUrl mode.
-You can use the **WebApplication.ViewUrlManager.GetUrl(viewShortcut)** method to obtain a URL by the ViewShortcut object corresponding to a required View ([CustomLinkController.cs](./CS/FriendlyUrlSample.Module.Web/Controllers/CustomLinkController.cs) / [CustomLinkController.vb](./VB/FriendlyUrlSample.Module.Web/Controllers/CustomLinkController.vb)).
+### 3. How to show a View in a new window on the client side
+The **WebApplication.ViewUrlManager.GetUrl(viewShortcut)** method allows you to obtain a View's URL by its ViewShortcut. This URL can be used as a parameter of the window.open JavaScript method to open a new browser window. See an example in the [CustomLinkController.cs](./CS/FriendlyUrlSample.Module.Web/Controllers/CustomLinkController.cs) and [CustomLinkController.vb](./VB/FriendlyUrlSample.Module.Web/Controllers/CustomLinkController.vb) files.
