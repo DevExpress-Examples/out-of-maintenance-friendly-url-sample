@@ -69,7 +69,7 @@ Protected Sub Application_Start(ByVal sender As Object, ByVal e As EventArgs)
 End Sub
 ```
 #### Important note
-The new User-Friendly URLs feature are based on the standard routing mechanism using [query string](https://en.wikipedia.org/wiki/Query_string) and [History API](https://developer.mozilla.org/en-US/docs/Web/API/History_API). It allows getting full page content via one request and gives us some significant improvements. For example, you will be able to achieve the functionality described in the [How to open a View specified in an external link after logging in to a Web application with the security system enabled?](https://isc.devexpress.com/Thread/WorkplaceDetails/B222208) ticket without any customization.
+The new User-Friendly URLs feature is based on the standard routing mechanism using [query string](https://en.wikipedia.org/wiki/Query_string) and [History API](https://developer.mozilla.org/en-US/docs/Web/API/History_API). It allows getting full page content via one request and gives us some significant improvements. For example, you will be able to achieve the functionality described in the [How to open a View specified in an external link after logging in to a Web application with the security system enabled?](https://isc.devexpress.com/Thread/WorkplaceDetails/B222208) ticket without any customization.
 
 ## Routing customizations
 
@@ -77,17 +77,30 @@ The new User-Friendly URLs feature are based on the standard routing mechanism u
 To have the '/YourCustomString/Contact_DetailView/ContactId' URL representation (just add a prefix and keep the rest), remove the default route and add a custom one using the following code:
 ```csharp
 //C#
-RouteTable.Routes.RegisterDefaultXafRoutes();
-RouteTable.Routes.Remove(RouteTable.Routes[ViewUrlManager.RouteName]);
-RouteTable.Routes.MapPageRoute(ViewUrlManager.RouteName, "YourCustomString/{ViewID}/{ObjectKey}/", "~/Default.aspx", false, new RouteValueDictionary() { { "ObjectKey", string.Empty } });
+using System;
+using System.Web.Routing;
+using DevExpress.ExpressApp.Web;
+//
+protected void Application_Start(Object sender, EventArgs e) {
+    RouteTable.Routes.RegisterDefaultXafRoutes();
+    RouteTable.Routes.Remove(RouteTable.Routes[ViewUrlManager.RouteName]);
+    RouteTable.Routes.MapPageRoute(ViewUrlManager.RouteName, "YourCustomString/{ViewID}/{ObjectKey}/", "~/Default.aspx", false, new RouteValueDictionary() { { "ObjectKey", string.Empty } });
+    //
+}
 ```
 ```vb
 'VB
-RouteTable.Routes.RegisterDefaultXafRoutes()
-RouteTable.Routes.Remove(RouteTable.Routes(ViewUrlManager.RouteName))
-Dim routeValueDictionary As RouteValueDictionary = New RouteValueDictionary()
-routeValueDictionary.Add("ObjectKey", String.Empty)
-RouteTable.Routes.MapPageRoute(ViewUrlManager.RouteName, "YourCustomString/{ViewID}/{ObjectKey}/", "~/Default.aspx", False, routeValueDictionary)
+Imports System
+Imports System.Web.Routing
+Imports DevExpress.ExpressApp.Web
+'
+Protected Sub Application_Start(ByVal sender As Object, ByVal e As EventArgs)
+    RouteTable.Routes.RegisterDefaultXafRoutes()
+    RouteTable.Routes.Remove(RouteTable.Routes(ViewUrlManager.RouteName))
+    Dim routeValueDictionary As RouteValueDictionary = New RouteValueDictionary()
+    routeValueDictionary.Add("ObjectKey", String.Empty)
+    RouteTable.Routes.MapPageRoute(ViewUrlManager.RouteName, "YourCustomString/{ViewID}/{ObjectKey}/", "~/Default.aspx", False, routeValueDictionary)
+End Sub
 ```
 
 
