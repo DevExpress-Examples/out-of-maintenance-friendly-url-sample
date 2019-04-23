@@ -92,7 +92,9 @@ RouteTable.Routes.MapPageRoute(ViewUrlManager.RouteName, "YourCustomString/{View
 
 
 ### 2. Fully change the default route format for BrowserHistoryMode.FriendlyUrl mode.
-To customize the default routing completely, create a custom class which implements the IViewUrlManager interface ([CustomRouteManager.cs](./CS/FriendlyUrlSample.Web/CustomViewUrlManager.cs)/[CustomViewUrlManager.vb](./VB/FriendlyUrlSample.Web/CustomViewUrlManager.vb)) and register it in the overridden **WebApplication.CreateRouteManager** method ([WebApplication.cs](./CS/FriendlyUrlSample.Web/WebApplication.cs)/[WebApplication.vb](./VB/FriendlyUrlSample.Web/WebApplication.vb)). The code in this example performs the following route customizations:
+To customize the default routing completely, create a custom class which implements the IViewUrlManager interface ([CustomRouteManager.cs](./CS/FriendlyUrlSample.Web/CustomViewUrlManager.cs)/[CustomViewUrlManager.vb](./VB/FriendlyUrlSample.Web/CustomViewUrlManager.vb)) and register it in the overridden **WebApplication.CreateRouteManager** method ([WebApplication.cs](./CS/FriendlyUrlSample.Web/WebApplication.cs)/[WebApplication.vb](./VB/FriendlyUrlSample.Web/WebApplication.vb)). 
+
+The code in this example demonstates how to create model extender to allow customization the ViewId parameter via model and performs the following route customizations:
 
 For ListView:  
 *  /Contacts/ instead of /Contact_ListView/
@@ -102,7 +104,7 @@ For DetailView:
 *  /Contact/ContactId/ instead of /Contact_DetailView/ContactId/
 *  /Task/TaskId/ instead of /DemoTask_DetailView/TaskId/
 
-
+Check the ([WebModule.cs](./CS/FriendlyUrlSample.Web/WebModule.cs)/[WebModule.vb](./VB/FriendlyUrlSample.Web/WebModule.vb)) files to see the implementation of the model extender
  
 ### 4. Open a DetailView in the new window from the client-side in BrowserHistoryMode.FriendlyUrl mode.
 You can use the **WebApplication.ViewUrlManager.GetUrl(viewShortcut)** method to obtain a URL by the ViewShortcut object corresponding to a required View ([CustomLinkController.cs](./CS/FriendlyUrlSample.Module.Web/Controllers/CustomLinkController.cs) / [CustomLinkController.vb](./VB/FriendlyUrlSample.Module.Web/Controllers/CustomLinkController.vb)).
