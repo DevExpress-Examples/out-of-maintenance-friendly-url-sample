@@ -52,19 +52,19 @@ Protected Overrides Function CreateViewUrlManager() As IViewUrlManager
     Return New ViewUrlManager()
 End Function
 ```
-2. Call the static RouteTable.Routes.RegisterDefaultXafRoutes() method in the Application_Start method of the Global.asax file:
+2. Call the static RouteTable.Routes.RegisterXafRoutes() method in the Application_Start method of the Global.asax file:
 
 ```csharp
 //C#
 protected void Application_Start(Object sender, EventArgs e) {
-  RouteTable.Routes.RegisterDefaultXafRoutes();
+  RouteTable.Routes.RegisterXafRoutes();
   //
 }
 ```
 ```vb
 'VB
 Protected Sub Application_Start(ByVal sender As Object, ByVal e As EventArgs)
-    RouteTable.Routes.RegisterDefaultXafRoutes()
+    RouteTable.Routes.RegisterXafRoutes()
     '
 End Sub
 ```
@@ -82,7 +82,7 @@ using System.Web.Routing;
 using DevExpress.ExpressApp.Web;
 //
 protected void Application_Start(Object sender, EventArgs e) {
-    RouteTable.Routes.RegisterDefaultXafRoutes();
+    RouteTable.Routes.RegisterXafRoutes();
     RouteTable.Routes.Remove(RouteTable.Routes[ViewUrlManager.RouteName]);
     RouteTable.Routes.MapPageRoute(ViewUrlManager.RouteName, "YourCustomString/{ViewID}/{ObjectKey}/", "~/Default.aspx", false, new RouteValueDictionary() { { "ObjectKey", string.Empty } });
     //
@@ -95,7 +95,7 @@ Imports System.Web.Routing
 Imports DevExpress.ExpressApp.Web
 '
 Protected Sub Application_Start(ByVal sender As Object, ByVal e As EventArgs)
-    RouteTable.Routes.RegisterDefaultXafRoutes()
+    RouteTable.Routes.RegisterXafRoutes()
     RouteTable.Routes.Remove(RouteTable.Routes(ViewUrlManager.RouteName))
     Dim routeValueDictionary As RouteValueDictionary = New RouteValueDictionary()
     routeValueDictionary.Add("ObjectKey", String.Empty)

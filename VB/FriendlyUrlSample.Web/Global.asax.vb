@@ -18,7 +18,7 @@ Public Class [Global]
         InitializeComponent()
     End Sub
     Protected Sub Application_Start(ByVal sender As Object, ByVal e As EventArgs)
-        RouteTable.Routes.RegisterDefaultXafRoutes()
+        RouteTable.Routes.RegisterXafRoutes()
         AddHandler ASPxWebControl.CallbackError, AddressOf Application_Error
 #If EASYTEST Then
         DevExpress.ExpressApp.Web.TestScripts.TestScriptsManager.EasyTestEnabled = True
