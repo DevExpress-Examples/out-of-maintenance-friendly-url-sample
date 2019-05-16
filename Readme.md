@@ -2,7 +2,7 @@
 
 ## How it works
 
-The application's URLs are managed by the **WebApplication.ViewUrlManager** object. This object should implement the **IViewUrlManager** interface with two methods - *GetUrl* and *GetViewShortcut*:
+The application's URLs are managed by the **WebApplication.ViewUrlManager** object. This object should implement the [IViewUrlManager](https://docs.devexpress.com/eXpressAppFramework/DevExpress.ExpressApp.Web.IViewUrlManager) interface with two methods - *GetUrl* and *GetViewShortcut*:
 
 ```csharp
 //C#
