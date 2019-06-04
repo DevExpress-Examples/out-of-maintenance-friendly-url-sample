@@ -68,8 +68,10 @@ Protected Sub Application_Start(ByVal sender As Object, ByVal e As EventArgs)
     '
 End Sub
 ```
-#### Note
+#### Notes
 The new User-Friendly URLs feature is based on the standard routing mechanism that uses a [query string](https://en.wikipedia.org/wiki/Query_string) and a [History API](https://developer.mozilla.org/en-US/docs/Web/API/History_API). This allows you to get full page content in a single request and gives us other significant improvements. For example, you will be able to achieve the functionality described in the [How to open a View specified in an external link after logging in to a Web application with the security system enabled?](https://isc.devexpress.com/Thread/WorkplaceDetails/B222208) ticket without any customization.
+
+User-Friendly URLs are enabled by default in a new project created using the Wizard.
 
 ## Routing customization
 
