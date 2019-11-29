@@ -57,14 +57,14 @@ End Function
 ```csharp
 //C#
 protected void Application_Start(Object sender, EventArgs e) {
-  RouteTable.Routes.RegisterXafRoutes();
+  System.Web.Routing.RouteTable.Routes.RegisterXafRoutes();
   //
 }
 ```
 ```vb
 'VB
 Protected Sub Application_Start(ByVal sender As Object, ByVal e As EventArgs)
-    RouteTable.Routes.RegisterXafRoutes()
+    System.Web.Routing.RouteTable.Routes.RegisterXafRoutes()
     '
 End Sub
 ```
