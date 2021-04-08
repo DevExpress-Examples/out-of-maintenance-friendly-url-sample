@@ -1,8 +1,8 @@
-﻿# ASP.NET WebForms User-Friendly URLs for Views - v19.1
+﻿# ASP.NET WebForms User-Friendly URLs for Views
 
 ## How it works
 
-The application's URLs are managed by the **WebApplication.ViewUrlManager** object. This object should implement the [IViewUrlManager](https://docs.devexpress.com/eXpressAppFramework/DevExpress.ExpressApp.Web.IViewUrlManager) interface with two methods - *GetUrl* and *GetViewShortcut*:
+With v19.1, the application's URLs are managed by the **WebApplication.ViewUrlManager** object. This object should implement the [IViewUrlManager](https://docs.devexpress.com/eXpressAppFramework/DevExpress.ExpressApp.Web.IViewUrlManager) interface with two methods - *GetUrl* and *GetViewShortcut*:
 
 ```csharp
 //C#
